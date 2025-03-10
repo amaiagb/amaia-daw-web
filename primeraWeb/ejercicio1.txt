@@ -1,0 +1,14 @@
+CREAR UNA CLASE USUARIO
+-nombre
+-apellidos
+-telefono
+-email
+-usuario
+-contraseña
+
+EL LOGIN VA A IR CONTRA UN BD
+
+CUANDO EL LOGIN SEA CORRECTO AÑADIR EL OBJETO USUARIO EN SESION
+
+CREAR UN ALTAUSUARIO.JSP - SERVLET ALTAUSUARIO.JAVA
+-form para dar de alta usuarios 
