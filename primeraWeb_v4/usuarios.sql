@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versión del servidor:         10.4.24-MariaDB - mariadb.org binary distribution
+-- Versión del servidor:         10.4.19-MariaDB - mariadb.org binary distribution
 -- SO del servidor:              Win64
--- HeidiSQL Versión:             12.8.0.6908
+-- HeidiSQL Versión:             12.7.0.6859
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -18,6 +18,18 @@
 -- Volcando estructura de base de datos para usuarios
 CREATE DATABASE IF NOT EXISTS `usuarios` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 USE `usuarios`;
+
+-- Volcando estructura para tabla usuarios.roles
+CREATE TABLE IF NOT EXISTS `roles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+-- Volcando datos para la tabla usuarios.roles: ~2 rows (aproximadamente)
+INSERT INTO `roles` (`id`, `nombre`) VALUES
+	(1, 'Administrador'),
+	(2, 'Usuario');
 
 -- Volcando estructura para tabla usuarios.usuarios
 CREATE TABLE IF NOT EXISTS `usuarios` (

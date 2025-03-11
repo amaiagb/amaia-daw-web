@@ -44,7 +44,7 @@ public class RolDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
-		String sql = "SELECT id, rol FROM roles WHERE id=?;";
+		String sql = "SELECT id, nombre FROM roles WHERE id=?;";
 		
 		try {
 			ps = con.prepareStatement(sql);
@@ -53,7 +53,7 @@ public class RolDAO {
 			
 			if(rs.next()) {
 				rol.setId(rs.getInt("id"));
-				rol.setNombre(rs.getString("rol"));
+				rol.setNombre(rs.getString("nombre"));
 			}
 				
 		} catch (SQLException e) {

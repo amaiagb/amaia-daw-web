@@ -13,6 +13,7 @@
 <p class="username">@<%= usuario.getUsuario() %></p>
 
 <a href="../listadoUsuarios">Listado de Usuarios</a>
+<a href="../listadoUsuarios">Listado de Roles</a>
 
 <% if(usuario.getRol().getId() == 1){ %>
 	<p><a href="crearRol.jsp">Crear Rol</a></p>

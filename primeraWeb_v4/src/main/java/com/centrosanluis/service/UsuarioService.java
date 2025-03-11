@@ -50,6 +50,10 @@ public class UsuarioService {
 		}
 	}
 
+	public boolean editUser(Usuario usuario) {
+		return usuarioBD.editUser(usuario);
+	}
+	
 	public void deleteUser(String user) {
 		
 		usuarioBD.deleteUser(user);

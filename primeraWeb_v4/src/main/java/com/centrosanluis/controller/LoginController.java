@@ -34,9 +34,7 @@ public class LoginController extends HttpServlet {
 		
 		usuario.setUsuario(request.getParameter("username"));
 		usuario.setContrasena(request.getParameter("password"));
-		
 		Usuario usuarioLogin = usuarioService.login(usuario);
-
 		if(usuarioLogin!=null) {
 			request.getSession().setAttribute("usuario", usuarioLogin);
 			response.sendRedirect("private/index.jsp");

@@ -15,10 +15,10 @@ public class UsuarioDAO {
 		Connection con = AccesoBD.getConnection();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		
+		System.out.println("login por parametro: "+usuario);
 		Usuario u = new Usuario();
 		
-		String sql = "SELECT u.usuario, u.nombre, u.apellidos, u.email, u.telefono, r.id, r.rol "
+		String sql = "SELECT u.usuario, u.nombre, u.apellidos, u.email, u.telefono, r.id, r.nombre "
 				+ "FROM usuarios u INNER JOIN roles r ON u.roles_id = r.id "
 				+ "WHERE usuario = ? AND contrasena = ?";
 
@@ -36,12 +36,10 @@ public class UsuarioDAO {
 				u.setEmail(rs.getString("email"));
 				u.setTelefono(rs.getString("telefono"));
 				u.setUsuario(rs.getString("usuario"));
-				
 				Rol rol = new Rol();
 				rol.setId(rs.getInt("id"));
 				rol.setNombre(rs.getString(7));
 				u.setRol(rol);
-				
 			}
 			
 		}catch(SQLException e) {
@@ -49,7 +47,6 @@ public class UsuarioDAO {
 		}finally {
 			AccesoBD.closeConnection(null, ps, con);
 		}
-		
 		return u;
 	}
 
@@ -116,7 +113,6 @@ public class UsuarioDAO {
 				u.setRol(rol);
 				
 				usuariosObtenidos.add(u);
-				
 			}
 			
 		}catch(SQLException e) {
@@ -125,8 +121,38 @@ public class UsuarioDAO {
 			AccesoBD.closeConnection(null, ps, con);
 		}
 		return usuariosObtenidos;
-		
 	}
+	
+	public boolean editUser(Usuario usuario) {
+		Connection con = AccesoBD.getConnection();
+		PreparedStatement ps = null;
+		
+		String sql = "UPDATE usuarios SET nombre = ?, apellidos = ?, telefono = ?, email = ?, roles_id = ?) WHERE usuario = ?";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			
+			ps.setString(1, usuario.getNombre());
+			ps.setString(2, usuario.getApellidos());
+			ps.setString(3, usuario.getTelefono());
+			ps.setString(4, usuario.getEmail());
+			ps.setInt(5, usuario.getRol().getId());
+			ps.setString(6, usuario.getUsuario());
+			
+			if(ps.executeUpdate() > 0) {
+				return true;
+			}else {
+				return false;
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			AccesoBD.closeConnection(null, ps, con);
+		}
+		return false;
+	}
+	
 
 	public void deleteUser(String user) {
 		Connection con = AccesoBD.getConnection();
@@ -142,8 +168,6 @@ public class UsuarioDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
 	}
 
 }
