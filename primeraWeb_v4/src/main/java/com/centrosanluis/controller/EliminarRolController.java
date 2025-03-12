@@ -1,6 +1,7 @@
 package com.centrosanluis.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -11,45 +12,41 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.centrosanluis.model.Rol;
 import com.centrosanluis.model.Usuario;
+import com.centrosanluis.service.RolService;
 import com.centrosanluis.service.UsuarioService;
 
-@WebServlet(name = "editarUsuario", urlPatterns = { "/editarUsuario" })
-public class EditarUsuarioController extends HttpServlet {
+@WebServlet(name = "borrarRol", urlPatterns = { "/borrarRol" })
+public class EliminarRolController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    UsuarioService usuarioService;
     
-    public EditarUsuarioController() {
+	RolService rolService;
+	
+    public EliminarRolController() {
         super();
     }
 
 	public void init(ServletConfig config) throws ServletException {
-		usuarioService = new UsuarioService();
-		
+		rolService = new RolService();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nombre = request.getParameter("nombre");
-		String apellidos = request.getParameter("apellidos");
-		String telefono = request.getParameter("telefono");
-		String email = request.getParameter("email");
-		String user = request.getParameter("usuario");
-		int idRol = Integer.valueOf(request.getParameter("rol"));
+		int rolId = Integer.valueOf(request.getParameter("rol"));
 		
-		Rol rol = new Rol();
+		Rol r = new Rol();
+		r.setId(rolId);
 		
-		rol.setId(idRol);
-
-		Usuario usuario = new Usuario(nombre, apellidos, email, telefono, user, "", rol);
-		
-		if(usuarioService.updateUsuario(usuario)) {
-			response.sendRedirect("private/index.jsp");
+		if(rolService.deleteRol(r)) {
+			response.sendRedirect("listadoUsuarios");
 		}else {
-			//devolver a la pantalla de editar
+			List<Rol> listadoRoles = rolService.getRoles();
+			
+			request.setAttribute("roles", listadoRoles);
+			request.setAttribute("error", "El rol no ha podido darse de baja");
+			
+			request.getRequestDispatcher("private/listadoRol.jsp").forward(request, response);
 		}
 	}
 

@@ -2,6 +2,7 @@ package com.centrosanluis.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -30,7 +31,7 @@ public class ListadoController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//llamo al service para obtener todos los usuarios
-		ArrayList<Usuario> listadoUsuarios = usuarioService.getUsuarios();
+		List<Usuario> listadoUsuarios = usuarioService.getUsuarios();
 		
 		//añado en la request el atributo (no sesion) listado usuarios
 		request.setAttribute("listadoUsuarios", listadoUsuarios);

@@ -2,6 +2,7 @@ package com.centrosanluis.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -30,7 +31,7 @@ public class AltaUsuarioController extends HttpServlet{
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	System.out.println("Entrando por GET");
-    	ArrayList<Rol> roles = rolService.getRoles();
+    	List<Rol> roles = rolService.getRoles();
     	request.getSession().setAttribute("roles", roles);
     	System.out.println("Sesion: "+request.getSession().getAttribute("roles"));
     	response.sendRedirect("registro.jsp");
@@ -45,17 +46,20 @@ public class AltaUsuarioController extends HttpServlet{
     	String usuario = req.getParameter("usuario");
     	String contrasena = req.getParameter("contrasena");
     	int idRol = Integer.valueOf(req.getParameter("rol"));
+    	
     	Rol rol = new Rol();
     	rol.setId(idRol);
     	
-    	Usuario nuevoUsuario = new Usuario(nombre, apellidos, email, telefono, usuario, contrasena,rol);
+    	Usuario nuevoUsuario = new Usuario(nombre, apellidos, email, telefono, usuario, contrasena, rol);
     	
     	if(usuarioService.addUser(nuevoUsuario)) {
     		resp.sendRedirect("login.jsp");
     	}else {
     		req.setAttribute("error", "No se ha podido dar de alta el usuario");
-    		ArrayList<Rol> roles = rolService.getRoles();
+    		
+    		List<Rol> roles = rolService.getRoles();
     		req.setAttribute("roles", roles);
+    		
     		req.getRequestDispatcher("registro.jsp").forward(req, resp);
     	}
     }

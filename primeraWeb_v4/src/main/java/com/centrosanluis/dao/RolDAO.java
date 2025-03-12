@@ -5,38 +5,39 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.centrosanluis.model.Rol;
 
 public class RolDAO {
 
-	public ArrayList<Rol> getRoles(){
-		ArrayList<Rol> roles = new ArrayList<Rol>();
+	public List<Rol> getRoles(){
+		List<Rol> roles = new ArrayList<Rol>();
 		Connection con = AccesoBD.getConnection();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
-		String sql = "SELECT id, rol FROM roles;";
+		String sql = "SELECT id, nombre FROM roles";
 		
 		try {
 			ps = con.prepareStatement(sql);
+			
 			rs = ps.executeQuery();
 			
-			while(rs.next()) {
-				Rol rol = new Rol();
-				rol.setId(rs.getInt("id"));
-				rol.setNombre(rs.getString("rol"));
+			while (rs.next()) {
+				Rol rol = new Rol(rs.getInt("id"), rs.getString("nombre"));
+				
 				roles.add(rol);
 			}
-				
-		} catch (SQLException e) {
+		}catch(SQLException e) {
 			e.printStackTrace();
-		} finally {
-			AccesoBD.closeConnection(rs, ps, con);
+		}finally {
+			AccesoBD.closeConnection(null, ps, con);
 		}
-		System.out.println("DAO: "+roles);
-		return roles;	
+		
+		return roles;
 	}
+
 	
 	public Rol getRolesById(int id){
 		Rol rol = new Rol();
@@ -71,9 +72,9 @@ public class RolDAO {
 		String sql = "";
 		
 		if(rol.getId() != 0) {
-			sql = "UPDATE roles SET rol = ? WHERE id = ?";
+			sql = "UPDATE roles SET nombre = ? WHERE id = ?";
 		} else {
-			sql = "INSERT INTO roles (rol) VALUES (?)";
+			sql = "INSERT INTO roles (nombre) VALUES (?)";
 		}
 		
 		try {
@@ -98,5 +99,30 @@ public class RolDAO {
 		return false;
 	}
 
+
+	public boolean deleteRol(Rol rol) {
+		Connection con = AccesoBD.getConnection();
+		PreparedStatement ps = null;
+		
+		String sql = "DELETE FROM roles WHERE id = ?";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, rol.getId());
+			
+			if(ps.executeUpdate() > 0) {
+				return true;
+			}else {
+				return false;
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			AccesoBD.closeConnection(null, ps, con);
+		}
+		return false;
+	}
 
 }

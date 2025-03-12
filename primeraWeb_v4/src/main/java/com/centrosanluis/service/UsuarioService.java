@@ -3,6 +3,7 @@ package com.centrosanluis.service;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.centrosanluis.dao.UsuarioDAO;
 import com.centrosanluis.model.Usuario;
@@ -17,7 +18,6 @@ public class UsuarioService {
 	
 	public Usuario login(Usuario usuario) {
 		String hashedPass = hashPassword(usuario.getContrasena());
-		
 		usuario.setContrasena(hashedPass);
 		
 		return usuarioBD.login(usuario);
@@ -25,13 +25,12 @@ public class UsuarioService {
 
 	public boolean addUser(Usuario nuevoUsuario) {
 		String hashedPass = hashPassword(nuevoUsuario.getContrasena());
-		
 		nuevoUsuario.setContrasena(hashedPass);
 		
 		return usuarioBD.addUser(nuevoUsuario);
 	}
 	
-	public ArrayList<Usuario> getUsuarios() {	
+	public List<Usuario> getUsuarios() {	
 		return usuarioBD.getUsuarios();
 	}
 	
@@ -54,10 +53,15 @@ public class UsuarioService {
 		return usuarioBD.editUser(usuario);
 	}
 	
-	public void deleteUser(String user) {
-		
-		usuarioBD.deleteUser(user);
+	public boolean deleteUser(Usuario user) {
+		return usuarioBD.deleteUser(user);
 		
 	}
+	public boolean updateUsuario(Usuario usuario) {
+		return usuarioBD.editUser(usuario);
+	}
 
+	public Usuario getUserByUsuario(String usuario) {
+		return usuarioBD.getUserByUsuario(usuario);
+	}
 }

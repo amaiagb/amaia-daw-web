@@ -2,6 +2,7 @@ package com.centrosanluis.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -30,7 +31,7 @@ public class ListadoRolesController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//llamo al service para obtener todos los roles
-		ArrayList<Rol> roles = rolService.getRoles();
+		List<Rol> roles = rolService.getRoles();
 		
 		//añado en la request el atributo (no sesion) listado roles
 		request.setAttribute("roles", roles);
