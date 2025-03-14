@@ -20,6 +20,9 @@
 		<p><a href="crearRol.jsp">Crear Rol</a></p>
 	</c:if>
 	
+	<% if(usuario.getRol().getId() == 1){ %>
+		<p><a href="crearRol.jsp">Crear Rol</a></p>
+	<% } %>
 	
 </body>
 </html>
