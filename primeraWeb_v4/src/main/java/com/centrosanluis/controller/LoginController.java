@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,7 +36,11 @@ public class LoginController extends HttpServlet {
 		usuario.setUsuario(request.getParameter("username"));
 		usuario.setContrasena(request.getParameter("password"));
 		Usuario usuarioLogin = usuarioService.login(usuario);
+		
 		if(usuarioLogin!=null) {
+			Cookie userCookie = new Cookie("usuario",usuarioLogin.getUsuario());
+			userCookie.setMaxAge(60*60*24);
+			response.addCookie(userCookie);
 			request.getSession().setAttribute("usuario", usuarioLogin);
 			response.sendRedirect("private/index.jsp");
 		}else {

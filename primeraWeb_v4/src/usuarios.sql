@@ -24,12 +24,13 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla usuarios.roles: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla usuarios.roles: ~3 rows (aproximadamente)
 INSERT INTO `roles` (`id`, `nombre`) VALUES
 	(1, 'Administrador'),
-	(2, 'Usuario');
+	(2, 'Usuario'),
+	(3, 'Invitado');
 
 -- Volcando estructura para tabla usuarios.usuarios
 CREATE TABLE IF NOT EXISTS `usuarios` (

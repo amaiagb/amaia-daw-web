@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page import="com.centrosanluis.model.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,8 +16,10 @@
 	<a href="../listadoUsuarios">Listado de Usuarios</a>
 	<a href="../listadoRoles">Listado de Roles</a>
 	
-	<% if(usuario.getRol().getId() == 1){ %>
+	<c:if test="${usuario.getRol().getId() == 1}">
 		<p><a href="crearRol.jsp">Crear Rol</a></p>
-	<% } %>
+	</c:if>
+	
+	
 </body>
 </html>
