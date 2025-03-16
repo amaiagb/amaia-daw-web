@@ -18,6 +18,8 @@
 			<input type="password" name="password" placeholder="Contraseña">
 			<button type="submit">Entrar</button>
 			<button type="reset">Borrar</button>
+			<input type="checkbox" name="recuerdame" id="recuerdame">
+			<label for="recuerdame">Recordarme</label>
 		</form>
 		<% if(request.getParameter("error") != null) {%>
 			<p>
