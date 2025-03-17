@@ -1,1 +1,105 @@
 *{margin: 0;padding: 0;box-sizing: border-box;}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+a {
+	text-decoration:none;
+	color:inherit;
+}
+button {
+	background: none;
+	border: none;
+	font-size:inherit;
+}
+
+nav {
+	background-color: #511414;
+	color: #fff;
+	padding: 1em 10%;
+	display:flex;
+	justify-content: space-between;
+}
+nav ul {
+	list-style-type: none;
+	display: flex;
+	justify-content: flex-end;
+}
+nav ul li {
+	padding: 0rem 2rem;
+}
+header h1 {
+	padding: 4rem 10%;
+  	font-weight: 400;
+}
+
+#productos-container {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 1rem;
+}
+
+.producto-card {
+    display: block;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+}
+.producto-img {
+	width:300px;
+	height:200px;
+}
+
+.producto-img img {
+  width: 100%;  /* Ocupa todo el ancho del contenedor */
+  height: 100%; /* Asegura que la imagen ocupe también el alto completo */
+  object-fit: cover; /* Mantiene la proporción de la imagen y la ajusta para cubrir todo el contenedor */
+  object-position: center; /* Centra la imagen dentro del contenedor */
+}
+.producto-txt {
+	padding: 1rem;
+}
+.producto-txt-nombre {
+	font-size: 1.4rem;
+}
+
+.producto-txt-precio {
+	color: cadetblue;
+	font-weight: 600;
+}
+.producto-links {
+	display:flex;
+	flex-wrap: nowrap;
+	justify-content: space-evenly;
+	padding:1rem;
+	gap: 1rem;
+}
+.producto-links>form, .producto-links>a{
+	width: 50%;
+}
+.btn {
+	display: block;
+	border-radius: 4px;
+	padding: 1rem;
+	width:100%;
+	text-align:center;
+	cursor:pointer;
+	transition: .2s ease-in-out;
+}
+.btn-line {
+	border: 1px solid #511414;
+}
+.btn-fill {
+	background-color: #bf6262;
+  	color: #fff;
+}
+.btn-line:hover {
+	border:1px solid #bf6262;
+	color: #bf6262;
+	transition: .2s ease-in-out;
+}
+.btn-fill:hover {
+	background-color: #511414;
+	transition: .2s ease-in-out;
+}

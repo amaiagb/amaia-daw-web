@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versión del servidor:         10.4.19-MariaDB - mariadb.org binary distribution
+-- Versión del servidor:         10.4.24-MariaDB - mariadb.org binary distribution
 -- SO del servidor:              Win64
--- HeidiSQL Versión:             12.7.0.6859
+-- HeidiSQL Versión:             12.8.0.6908
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -27,21 +27,24 @@ CREATE TABLE IF NOT EXISTS `administradores` (
   `Password` varchar(100) NOT NULL DEFAULT '0',
   `Email` varchar(100) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla tienda.administradores: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla tienda.administradores: ~1 rows (aproximadamente)
+INSERT INTO `administradores` (`id`, `Nombre`, `Username`, `Password`, `Email`) VALUES
+	(1, 'Alberto', 'alberto', '1234', 'alberto@gmail.com');
 
 -- Volcando estructura para tabla tienda.categorias
 CREATE TABLE IF NOT EXISTS `categorias` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla tienda.categorias: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla tienda.categorias: ~3 rows (aproximadamente)
 INSERT INTO `categorias` (`id`, `nombre`) VALUES
 	(1, 'electronica'),
-	(2, 'sonido');
+	(2, 'sonido'),
+	(3, 'gaming');
 
 -- Volcando estructura para tabla tienda.productos
 CREATE TABLE IF NOT EXISTS `productos` (
@@ -55,11 +58,16 @@ CREATE TABLE IF NOT EXISTS `productos` (
   PRIMARY KEY (`id`),
   KEY `FK_productos_categorias` (`Categoria`),
   CONSTRAINT `FK_productos_categorias` FOREIGN KEY (`Categoria`) REFERENCES `categorias` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla tienda.productos: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla tienda.productos: ~6 rows (aproximadamente)
 INSERT INTO `productos` (`id`, `Nombre`, `Descripcion`, `Precio`, `Stock`, `Imagen`, `Categoria`) VALUES
-	(1, 'Cámara', 'Cámara reflex Fujifilm', 600, 3, 'camara.jpg', 1);
+	(1, 'Cámara', 'Cámara reflex Fujifilm', 600, 3, 'camara.jpg', 1),
+	(2, 'Ipad', 'iPad 256GB', 400, 10, 'ipad.jpg', 1),
+	(3, 'Auriculares', 'Auriculares Bluetooth', 160, 8, 'headphones.jpg', 2),
+	(4, 'NES', 'Nintendo NES', 320, 2, 'nes.jpg', 3),
+	(5, 'Auriculares Sony', 'Auriculares Bluetooth', 210, 20, 'cascos.jpg', 2),
+	(6, 'Drone', 'Drone 4K Film', 999, 5, 'drone.jpg', 1);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

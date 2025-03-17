@@ -2,7 +2,7 @@ package com.sanluis.tienda.model;
 
 public class Admin {
 	
-	private String nombre, username, email;
+	private String nombre, username, email, password;
 	private int id;
 	
 	
@@ -29,6 +29,13 @@ public class Admin {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	@Override
 	public String toString() {
