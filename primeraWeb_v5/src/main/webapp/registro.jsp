@@ -24,41 +24,21 @@
 		</c:choose>
 	</h2>
 	
-	<c:choose>
-		<c:when test="${usuario != null }">
 			<form action="editarUsuario" method="post">
-				<input type="text" name="nombre" value="${usuario.nombre}" placeholder="Nombre" required>
-				<input type="text" name="apellidos" value="${usuario.apellidos}" placeholder="Apellidos" required>
-				<input type="text" name="email" value="${usuario.email}" placeholder="Correo Electrónico" required>
-				<input type="text" name="telefono" value="${usuario.telefono}" placeholder="Telefono" required>
-				<input type="text" name="usuario" value="${usuario.usuario }" readonly placeholder="Usuario" required>
+				<input type="text" name="nombre" value="${usuario != null ? usuario.nombre: ''}" placeholder="Nombre" required>
+				<input type="text" name="apellidos" value="${usuario != null ? usuario.apellidos: ''}" placeholder="Apellidos" required>
+				<input type="text" name="email" value="${usuario != null ? usuario.email: ''}" placeholder="Correo Electrónico" required>
+				<input type="text" name="telefono" value="${usuario != null ? usuario.telefono: ''}" placeholder="Telefono" required>
+				<input type="text" name="usuario" value="${usuario != null ? usuario.usuario: ''}" ${usuario != null ? "readonly": ''} placeholder="Usuario" required>
+				<c:if test="${usuario == null }">
+					<input type="text" name="contrasena" placeholder="Contraseña" required>
+				</c:if>
 				<select id="rol" name="rol">
 					<c:forEach var="r" items="${roles}">
-						<option value="${r.id }">
-							<c:out value="${r.nombre}"></c:out>
-						</option>
+						<option value="${r.id }">${r.nombre}</option>
 					</c:forEach>
 				</select>
 			</form>
-		</c:when>
-		<c:otherwise>
-			<form action="registro" method="post">
-				<input type="text" name="nombre" value="" placeholder="Nombre" required>
-				<input type="text" name="apellidos" value="" placeholder="Apellidos" required>
-				<input type="text" name="email" value="" placeholder="Correo Electrónico" required>
-				<input type="text" name="telefono" value="" placeholder="Telefono" required>
-				<input type="text" name="usuario" value="" placeholder="Usuario" required>
-				<input type="text" name="contrasena" placeholder="Contraseña" required>
-				<select id="rol" name="rol">
-					<c:forEach var="r" items="${roles}">
-						<option value="${r.id }">
-							<c:out value="${r.nombre}"></c:out>
-						</option>
-					</c:forEach>
-				</select>
-			</form>
-		</c:otherwise>
-	</c:choose>
 		
 		<button type="submit">
 		 	<c:choose>
@@ -82,7 +62,7 @@
 </div>
 <script>
     <c:if test="${usuario != null}">
-        document.getElementById("rol").value = "${usuario.rol.id}";
+        document.getElementById("rol").value = ${usuario.rol.id};
     </c:if>
 </script>
 </body>
