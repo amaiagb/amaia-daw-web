@@ -43,14 +43,13 @@
 				<div class="producto-links">
 					<a href="producto?id=${producto.id}" class="btn btn-line">Detalles</a>
 					<form action="carrito" method="post">
+						<input type="hidden" name="id" value="${producto.id}">
 						<button type="submit" class="btn btn-fill">Comprar</button>
 					</form>
 				</div>
 			</div>
 			</c:forEach>
-			
 		</div>
 	</main>
-	
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.sanluis.tienda.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -30,14 +31,36 @@ public class CarritoController extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 
+		
+		HashMap<Integer, Integer> productos_carrito = new HashMap<>();
+		Cookie[] cookies = request.getCookies();
+		
+		if(cookies != null) { 
+			for(Cookie c : cookies) {
+				if("carrito".equals(c.getName())) {
+					String carrito  = c.getValue();
+					String[] carrito_ids = carrito.split("\\?");
+					
+					for (String id : carrito_ids) {
+                        int productoId = Integer.parseInt(id);
+                        System.out.print(productoId+",");
+                        productos_carrito.put(productoId, productos_carrito.getOrDefault(productoId, 0) + 1);
+                    }
+					//Llamar a la BD pasando el map[int, int] y que me devuelva un map[Producto, int]
+					//Settear el atributo con ese map 
+					request.setAttribute("productos_carrito", productos_carrito);
+				} 
+			}
+		} 
+		//response.sendRedirect("carrito.jsp");
+		request.getRequestDispatcher("carrito.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int id_producto = Integer.parseInt(request.getParameter("id"));
 		Producto producto = productoService.getProductoById(id_producto);
-		
+		String id = request.getParameter("id");
 		
 		Cookie[] cookies = request.getCookies();
 		
@@ -45,21 +68,25 @@ public class CarritoController extends HttpServlet {
 			
 			for(Cookie c : cookies) {
 				if("carrito".equals(c.getName())) {
-					String carrito_values = c.getValue();
-					carrito_values.concat(", "+Integer.valueOf(id_producto));
-					c.setValue(carrito_values);
+					System.out.println("nueva cookie: "+id);
+					
+					String carrito_anterior = c.getValue();
+					String nuevo_carrito = carrito_anterior.concat("?"+id);
+					
+					System.out.println(nuevo_carrito);
+					c.setValue(nuevo_carrito);
 					response.addCookie(c);
+					
 				} else { //no existe la cookie carrito
-					Cookie cookie = new Cookie("carrito", "id_producto");
+					Cookie cookie = new Cookie("carrito", id);
 					response.addCookie(cookie);
 				}
 			}
 		} else  { //no existe ninguna cookie
-			Cookie cookie = new Cookie("carrito", "id_producto");
+			Cookie cookie = new Cookie("carrito", id);
 			response.addCookie(cookie);
 		}
-		
-		response.sendRedirect("carrito.jsp");
+		response.sendRedirect("inicio");
 	}
 
 }
