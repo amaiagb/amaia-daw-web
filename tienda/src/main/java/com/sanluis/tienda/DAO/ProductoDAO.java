@@ -45,7 +45,7 @@ public class ProductoDAO {
 		return productos;
 	}
 
-	public Producto getProductoById(String id) {
+	public Producto getProductoById(int id) {
 		Connection con = AccesoBD.getConnection();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -55,7 +55,7 @@ public class ProductoDAO {
 		
 		try {
 			ps = con.prepareStatement(sql);
-			ps.setString(1, id);
+			ps.setInt(1, id);
 			rs = ps.executeQuery();
 			
 			if(rs.next()) {

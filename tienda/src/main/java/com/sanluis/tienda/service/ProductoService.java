@@ -14,7 +14,7 @@ public class ProductoService {
 		return productoDAO.getProductos();
 	}
 
-	public Producto getProductoById(String id) {
+	public Producto getProductoById(int id) {
 		return productoDAO.getProductoById(id);
 	}
 

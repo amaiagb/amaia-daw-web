@@ -28,7 +28,7 @@ public class ProductoController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 
-		String id = request.getParameter("id");
+		int id = Integer.parseInt(request.getParameter("id"));
 		Producto producto = productoService.getProductoById(id);
 		if(producto != null) {
 			request.getSession().setAttribute("producto", producto);

@@ -14,7 +14,7 @@
 		<nav>
 			<a href="inicio"><i class="fa-solid fa-house" style="color: #ffffff;"></i></a>
 			<ul>
-				<li><a href="login">Login</a></li>
+				<li><a href="login.jsp">Login</a></li>
 				<li><a href="carrito"><i class="fas fa-cart-plus"></i> </a></li>
 			</ul>
 		</nav>
@@ -37,7 +37,7 @@
 				</div>
 				<div class="producto-txt">
 					<p class="producto-txt-nombre">${producto.nombre}</p>
-					<p>${producto.descripcion}</p>
+					<p class="producto-txt-descripcion">${producto.descripcion}</p>
 					<p class="producto-txt-precio">${producto.precio}<span>€</span></p>
 				</div>
 				<div class="producto-links">

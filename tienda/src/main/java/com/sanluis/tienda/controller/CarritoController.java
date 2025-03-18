@@ -5,10 +5,12 @@ import java.io.IOException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sanluis.tienda.model.Producto;
 import com.sanluis.tienda.service.ProductoService;
 
 /**
@@ -32,21 +34,32 @@ public class CarritoController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Obtener los parámetros del producto (suponiendo que vienen en la solicitud)
-
-        // Parsear cantidad y precio
-
-        // Crear un objeto JSON para representar el producto
-
-        // Obtener la cookie de carrito, si ya existe
-
-        // Convertir el carrito de String a un ArrayList (o similar)
-
-        // Agregar el nuevo producto a la lista
-
-        // Convertir la lista de vuelta a JSON y guardarla en la cookie
-
-        // Redirigir o responder
+		
+		int id_producto = Integer.parseInt(request.getParameter("id"));
+		Producto producto = productoService.getProductoById(id_producto);
+		
+		
+		Cookie[] cookies = request.getCookies();
+		
+		if(cookies != null) { 
+			
+			for(Cookie c : cookies) {
+				if("carrito".equals(c.getName())) {
+					String carrito_values = c.getValue();
+					carrito_values.concat(", "+Integer.valueOf(id_producto));
+					c.setValue(carrito_values);
+					response.addCookie(c);
+				} else { //no existe la cookie carrito
+					Cookie cookie = new Cookie("carrito", "id_producto");
+					response.addCookie(cookie);
+				}
+			}
+		} else  { //no existe ninguna cookie
+			Cookie cookie = new Cookie("carrito", "id_producto");
+			response.addCookie(cookie);
+		}
+		
+		response.sendRedirect("carrito.jsp");
 	}
 
 }

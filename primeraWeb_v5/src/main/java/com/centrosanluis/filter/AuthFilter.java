@@ -21,7 +21,6 @@ public class AuthFilter implements Filter {
 	
 	UsuarioService usuarioService;
 	
-	
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		usuarioService = new UsuarioService();
