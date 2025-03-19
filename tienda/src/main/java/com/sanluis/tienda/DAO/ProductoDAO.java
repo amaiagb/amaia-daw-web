@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.sanluis.tienda.model.Producto;
 
@@ -76,6 +77,18 @@ public class ProductoDAO {
 		
 		
 		return p;
+	}
+
+	public HashMap<Producto, Integer> getProductosCantidad(HashMap<Integer, Integer> productos_carrito) {
+
+		HashMap<Producto, Integer> carrito  = new HashMap<Producto, Integer>();
+		
+		productos_carrito.forEach( (id, ud) -> {
+			Producto p = getProductoById(id);
+			carrito.put(p, ud);
+		});
+		
+		return carrito;
 	}
 	
 	

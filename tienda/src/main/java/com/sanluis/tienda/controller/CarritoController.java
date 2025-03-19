@@ -46,9 +46,11 @@ public class CarritoController extends HttpServlet {
                         System.out.print(productoId+",");
                         productos_carrito.put(productoId, productos_carrito.getOrDefault(productoId, 0) + 1);
                     }
-					//Llamar a la BD pasando el map[int, int] y que me devuelva un map[Producto, int]
-					//Settear el atributo con ese map 
-					request.setAttribute("productos_carrito", productos_carrito);
+					
+ 					HashMap<Producto, Integer> carritoUnidades = productoService.getProductosCantidad(productos_carrito);
+ 					double total = productoService.getTotal(carritoUnidades);
+					request.setAttribute("carrito", carritoUnidades);
+					request.setAttribute("total", total);
 				} 
 			}
 		} 
