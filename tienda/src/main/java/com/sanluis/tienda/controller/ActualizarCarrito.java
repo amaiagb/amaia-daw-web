@@ -14,23 +14,24 @@ import javax.servlet.http.HttpServletResponse;
 import com.sanluis.tienda.model.Producto;
 import com.sanluis.tienda.service.ProductoService;
 
-/**
- * Servlet implementation class CarritoController
- */
-@WebServlet("/carrito")
-public class CarritoController extends HttpServlet {
+@WebServlet(name = "actualizarCarrito", urlPatterns = { "/actualizarCarrito" })
+public class ActualizarCarrito extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	ProductoService productoService;   
 	
-    public CarritoController() {
+    public ActualizarCarrito() {
         super();
-         
     }
-    public void init(ServletConfig config) throws ServletException {
-		 productoService = new ProductoService();
+
+	public void init(ServletConfig config) throws ServletException {
+		productoService = new ProductoService();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HashMap<Integer, Integer> productos_carrito = new HashMap<>();
 		Cookie[] cookies = request.getCookies();
@@ -38,11 +39,8 @@ public class CarritoController extends HttpServlet {
 		if(cookies != null) { 
 			for(Cookie c : cookies) {
 				if("carrito".equals(c.getName())) {
-					String carritoCookie  = c.getValue();
-					
-					HashMap<Producto, Integer> carritoUnidades = productoService.getProductosMap(carritoCookie);
-					/*
-					String[] carrito_ids = carritoCookie.split("\\?");
+					String carrito  = c.getValue();
+					String[] carrito_ids = carrito.split("\\?");
 					
 					for (String id : carrito_ids) {
                         int productoId = Integer.parseInt(id);
@@ -51,7 +49,6 @@ public class CarritoController extends HttpServlet {
                     }
 					
  					HashMap<Producto, Integer> carritoUnidades = productoService.getProductosCantidad(productos_carrito);
- 					*/
  					double total = productoService.getTotal(carritoUnidades);
 					request.setAttribute("carrito", carritoUnidades);
 					request.setAttribute("total", total);
@@ -60,39 +57,6 @@ public class CarritoController extends HttpServlet {
 		} 
 		//response.sendRedirect("carrito.jsp");
 		request.getRequestDispatcher("carrito.jsp").forward(request, response);
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		int id_producto = Integer.parseInt(request.getParameter("id"));
-		Producto producto = productoService.getProductoById(id_producto);
-		String id = request.getParameter("id");
-		
-		Cookie[] cookies = request.getCookies();
-		
-		if(cookies != null) { 
-			
-			for(Cookie c : cookies) {
-				if("carrito".equals(c.getName())) {
-					System.out.println("nueva cookie: "+id);
-					
-					String carrito_anterior = c.getValue();
-					String nuevo_carrito = carrito_anterior.concat("?"+id);
-					
-					System.out.println(nuevo_carrito);
-					c.setValue(nuevo_carrito);
-					response.addCookie(c);
-					
-				} else { //no existe la cookie carrito
-					Cookie cookie = new Cookie("carrito", id);
-					response.addCookie(cookie);
-				}
-			}
-		} else  { //no existe ninguna cookie
-			Cookie cookie = new Cookie("carrito", id);
-			response.addCookie(cookie);
-		}
-		response.sendRedirect("inicio");
 	}
 
 }

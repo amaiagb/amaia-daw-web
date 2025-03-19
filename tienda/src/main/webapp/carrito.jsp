@@ -33,17 +33,19 @@
 					<p class="producto-txt-precio">${producto.key.precio}<span>€</span></p>
 					<p class="producto-txt-cantidad">Ud: ${producto.value}</p>
 				</div>
-				<div class="producto-links">
-					<a href="producto?id=${producto.key}" class="btn btn-line">Detalles</a>
-					<form action="carrito" method="post">
-						<input type="hidden" name="id" value="${producto.value}">
-						<button type="submit" class="btn btn-fill">Comprar</button>
-					</form>
-				</div>
+				<form action="actualizarCarrito" method="post">
+					<input type="number" value="${producto.value}" name="${producto.key.id}">
+				</form>
 			</div>
 			</c:forEach>
 		</div>
-		<h3>Total: ${total} €</h3>
+		<section class="carrito-footer">
+			<div class="carrito-buttons">
+				<a href="vaciarCarrito" class="btn btn-fill">Vaciar Carrito</a>
+				<button type="submit"  class="btn btn-fill">Actualizar Carrito</a>
+			</div>
+			<p>Total: ${total} €</p>
+		</section>
 	</main>
 </body>
 </html>

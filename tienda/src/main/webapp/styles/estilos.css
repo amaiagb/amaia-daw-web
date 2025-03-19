@@ -146,3 +146,17 @@ form.login .btn {
 	width: inherit;
   padding: .5rem 3rem;
 }
+
+.carrito-footer {
+	display:flex;
+	justify-content: space-between;
+	flex-wrap: nowrap;
+	align-items:center;
+	padding: 2rem 10%;
+}
+.carrito-buttons {
+	display:flex;
+	justify-content: flex-start;
+	gap: 1rem;
+	width:50%;
+}
