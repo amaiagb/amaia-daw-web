@@ -7,11 +7,25 @@
 <meta charset="ISO-8859-1">
 <title>Gestión de Productos</title>
 </head>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="../styles/estilos.css">
+</head>
 <body>
-	<h1>Hola, ${admin.nombre}</h1>
-	<h2>Gestión de productos</h2>
-	<a href="" class="">Añadir Producto</a>
-	<a href="" class="">Editar Producto</a>
-	<a href="" class="">Eliminar Producto</a>
+	<header>
+		<nav>
+			<a href="inicio"><i class="fa-solid fa-house" style="color: #ffffff;"></i></a>
+			<ul>
+				<li><a href="login.jsp">Login</a></li>
+				<li><a href="carrito"><i class="fas fa-cart-plus"></i> </a></li>
+			</ul>
+		</nav>
+		<h1>Hola, ${admin.nombre}</h1>
+	</header>
+	<main>
+		<h2>Gestión de productos</h2>
+		<a href="addProducto" class="">Añadir Producto</a>
+		<a href="addProducto" class="">Editar Producto</a>
+		<a href="" class="">Eliminar Producto</a>
+	</main>
 </body>
 </html>

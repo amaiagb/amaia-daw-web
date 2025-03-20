@@ -41,18 +41,9 @@ public class CarritoController extends HttpServlet {
 					String carritoCookie  = c.getValue();
 					
 					HashMap<Producto, Integer> carritoUnidades = productoService.getProductosMap(carritoCookie);
-					/*
-					String[] carrito_ids = carritoCookie.split("\\?");
 					
-					for (String id : carrito_ids) {
-                        int productoId = Integer.parseInt(id);
-                        System.out.print(productoId+",");
-                        productos_carrito.put(productoId, productos_carrito.getOrDefault(productoId, 0) + 1);
-                    }
-					
- 					HashMap<Producto, Integer> carritoUnidades = productoService.getProductosCantidad(productos_carrito);
- 					*/
  					double total = productoService.getTotal(carritoUnidades);
+ 					
 					request.setAttribute("carrito", carritoUnidades);
 					request.setAttribute("total", total);
 				} 
@@ -85,11 +76,13 @@ public class CarritoController extends HttpServlet {
 					
 				} else { //no existe la cookie carrito
 					Cookie cookie = new Cookie("carrito", id);
+					cookie.setMaxAge(60*60*24);
 					response.addCookie(cookie);
 				}
 			}
 		} else  { //no existe ninguna cookie
 			Cookie cookie = new Cookie("carrito", id);
+			cookie.setMaxAge(60*60*24);
 			response.addCookie(cookie);
 		}
 		response.sendRedirect("inicio");

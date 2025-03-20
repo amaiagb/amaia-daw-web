@@ -19,23 +19,6 @@ public class ProductoService {
 	public Producto getProductoById(int id) {
 		return productoDAO.getProductoById(id);
 	}
-
-	public HashMap<Producto, Integer> getProductosCantidad(HashMap<Integer, Integer> productos_carrito) {
-		
-		return productoDAO.getProductosCantidad(productos_carrito);
-	}
-
-	public double getTotal(HashMap<Producto, Integer> carritoUnidades) {
-	    double total = 0;
-
-	    for (Map.Entry<Producto, Integer> entry : carritoUnidades.entrySet()) {
-	        Producto p = entry.getKey();
-	        int ud = entry.getValue();
-	        total += p.getPrecio() * ud;
-	    }
-
-	    return total;
-	}
 	
 	public HashMap<Producto, Integer> getProductosMap(String cookie) {
 		HashMap<Producto, Integer> productosCantidadMap = null;
@@ -51,25 +34,43 @@ public class ProductoService {
 	            idsCantidadMap.put(productoId, idsCantidadMap.getOrDefault(productoId, 0) + 1);
 	        }
 			
-			/* ERROR LAMBDA
+			 for (Map.Entry<Integer, Integer> entry : idsCantidadMap.entrySet()) {
+	            int id = entry.getKey();
+	            int cantidad = entry.getValue();
+	            Producto p = productoDAO.getProductoById(id);
+                if (p != null) {
+                    productosCantidadMap.put(p, cantidad); 
+                }
+	        }
+
+			/* error
 			idsCantidadMap.forEach( (id, ud) -> {
 				Producto p = productoDAO.getProductoById(id);
 				productosCantidadMap.put(p, ud);
 			});
 			*/
-			
-			 for (Map.Entry<Integer, Integer> entry : idsCantidadMap.entrySet()) {
-		            int id = entry.getKey();
-		            int cantidad = entry.getValue();
-		            Producto p = productoDAO.getProductoById(id);
-	                if (p != null) {
-	                    productosCantidadMap.put(p, cantidad);  // Modificamos fuera de la lambda
-	                }
-		        }
-			
 		}
-		
 		return productosCantidadMap;
 	}
+
+	
+
+	public double getTotal(HashMap<Producto, Integer> carritoUnidades) {
+	    double total = 0;
+
+	    for (Map.Entry<Producto, Integer> entry : carritoUnidades.entrySet()) {
+	        Producto p = entry.getKey();
+	        int ud = entry.getValue();
+	        total += p.getPrecio() * ud;
+	    }
+
+	    return total;
+	}
+	
+	
+	public HashMap<Producto, Integer> getProductosCantidad(HashMap<Integer, Integer> productos_carrito) {
+			
+			return productoDAO.getProductosCantidad(productos_carrito);
+		}
 
 }
