@@ -14,6 +14,7 @@ button {
 	background: none;
 	border: none;
 	font-size:inherit;
+	cursor: pointer;
 }
 
 nav {
@@ -159,4 +160,30 @@ form.login .btn {
 	justify-content: flex-start;
 	gap: 1rem;
 	width:50%;
+}
+main#gestion_productos {
+	padding: 1rem 10%;
+}
+.btn-add {
+	width:auto;
+	display:inline-block;
+	margin: 2rem 0;
+}
+table {
+	border-collapse: collapse;
+	text-align: left;
+}
+th {
+	padding: 1rem;
+}
+td {
+	padding: 1rem;
+}
+tr {
+	border: 1px solid #ddd;
+}
+td>img {
+	width:200px;
+	height:200px;
+	object-fit: cover;
 }

@@ -14,7 +14,15 @@
 		<nav>
 			<a href="inicio"><i class="fa-solid fa-house" style="color: #ffffff;"></i></a>
 			<ul>
-				<li><a href="login.jsp">Login</a></li>
+				<c:choose>
+					<c:when test="${sessionScope.admin != null}">
+						<li><a href="private/gestionProductos.jsp">Gestionar Productos</a></li>
+						<li><a href="logout">Cerrar Sesión</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="login.jsp">Login</a></li>
+					</c:otherwise>
+				</c:choose>
 				<li><a href="carrito"><i class="fas fa-cart-plus"></i> </a></li>
 			</ul>
 		</nav>

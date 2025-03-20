@@ -7,14 +7,22 @@
 <meta charset="UTF-8">
 <title>Tienda</title>
  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-<link rel="stylesheet" href="styles/estilos.css">
+<link rel="stylesheet" href="/tienda/styles/estilos.css">
 </head>
 <body>
 	<header>
 		<nav>
 			<a href="inicio"><i class="fa-solid fa-house" style="color: #ffffff;"></i></a>
 			<ul>
-				<li><a href="login.jsp">Login</a></li>
+				<c:choose>
+					<c:when test="${sessionScope.admin != null}">
+						<li><a href="gestionProductos">Gestionar Productos</a></li>
+						<li><a href="logout">Cerrar Sesión</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="login.jsp">Login</a></li>
+					</c:otherwise>
+				</c:choose>
 				<li><a href="carrito"><i class="fas fa-cart-plus"></i> </a></li>
 			</ul>
 		</nav>

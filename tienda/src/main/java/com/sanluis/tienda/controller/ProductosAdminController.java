@@ -3,7 +3,7 @@ package com.sanluis.tienda.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,27 +13,29 @@ import javax.servlet.http.HttpServletResponse;
 import com.sanluis.tienda.model.Producto;
 import com.sanluis.tienda.service.ProductoService;
 
-@WebServlet("/inicio")
-public class InicioController extends HttpServlet {
+@WebServlet(name = "gestionProductos", urlPatterns = { "/gestionProductos" })
+public class ProductosAdminController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	ProductoService productoService;
+    ProductoService productoService;  
 	
-    public InicioController() {
+    public ProductosAdminController() {
         super();
-        productoService = new ProductoService();
+         
     }
 
+	public void init(ServletConfig config) throws ServletException {
+		 productoService = new ProductoService();
+	}
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+		 
 		ArrayList<Producto> productos = productoService.getProductos();
 		request.setAttribute("productos", productos);
-		request.getRequestDispatcher("index.jsp").forward(request, response);
-		
+		request.getRequestDispatcher("private/gestionProductos.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 
 	}
 
 }
