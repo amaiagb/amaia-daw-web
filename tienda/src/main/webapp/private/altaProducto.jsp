@@ -30,7 +30,7 @@
 		<h1>Hola, ${admin.nombre}</h1>
 	</header>
 	
-	<main id="altaUsuario">
+	<main id="altaProducto">
 	
 		<h2>Registrar Nuevo Producto</h2>
 		

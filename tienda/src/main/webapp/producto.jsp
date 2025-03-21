@@ -16,14 +16,14 @@
 			<ul>
 				<c:choose>
 					<c:when test="${sessionScope.admin != null}">
-						<li><a href="private/gestionProductos.jsp">Gestionar Productos</a></li>
-						<li><a href="logout">Cerrar Sesión</a></li>
+						<li><a href="/tienda/gestionProductos">Gestionar Productos</a></li>
+						<li><a href="/tienda/logout">Cerrar Sesión</a></li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="login.jsp">Login</a></li>
+						<li><a href="/tienda/login.jsp">Login</a></li>
 					</c:otherwise>
 				</c:choose>
-				<li><a href="carrito"><i class="fas fa-cart-plus"></i> </a></li>
+				<li><a href="/tienda/carrito"><i class="fas fa-cart-plus"></i> </a></li>
 			</ul>
 		</nav>
 		<h1>${producto.nombre}</h1>

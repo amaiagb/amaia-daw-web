@@ -1,9 +1,13 @@
 package com.sanluis.tienda.service;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.sanluis.tienda.DAO.AccesoBD;
 import com.sanluis.tienda.DAO.ProductoDAO;
 import com.sanluis.tienda.model.Producto;
 
@@ -72,5 +76,27 @@ public class ProductoService {
 			
 			return productoDAO.getProductosCantidad(productos_carrito);
 		}
+
+	public boolean addProducto(Producto producto) {
+		Connection con = AccesoBD.getConnection();
+		PreparedStatement ps = null;
+		
+		String sql = "INSERT INTO productos(nombre, descripcion, precio, stock, imagen) VALUES(?,?,?,?,?);";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, producto.getNombre());
+			ps.setString(2, producto.getDescripcion());
+			ps.setDouble(3, producto.getPrecio());
+			ps.setInt(4, producto.getStock());
+			ps.setString(5, producto.getImagen());
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return false;
+	}
 
 }

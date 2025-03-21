@@ -87,5 +87,4 @@ public class CarritoController extends HttpServlet {
 		}
 		response.sendRedirect("inicio");
 	}
-
 }
