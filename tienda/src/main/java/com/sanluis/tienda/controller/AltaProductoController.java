@@ -35,8 +35,8 @@ public class AltaProductoController extends HttpServlet {
 		//int id = Integer.parseInt(request.getParameter("id"));
 		String nombre = request.getParameter("nombre");
 		String descripcion = request.getParameter("descripcion");
-		double precio = Double.parseDouble(request.getParameter("telefono"));
-		int stock = Integer.parseInt(request.getParameter("email"));
+		double precio = Double.valueOf(request.getParameter("precio"));
+		int stock = Integer.valueOf(request.getParameter("stock"));
 		String imagen = request.getParameter("imagen");
 		
 		Producto producto = new Producto();

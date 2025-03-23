@@ -78,25 +78,11 @@ public class ProductoService {
 		}
 
 	public boolean addProducto(Producto producto) {
-		Connection con = AccesoBD.getConnection();
-		PreparedStatement ps = null;
-		
-		String sql = "INSERT INTO productos(nombre, descripcion, precio, stock, imagen) VALUES(?,?,?,?,?);";
-		
-		try {
-			ps = con.prepareStatement(sql);
-			ps.setString(1, producto.getNombre());
-			ps.setString(2, producto.getDescripcion());
-			ps.setDouble(3, producto.getPrecio());
-			ps.setInt(4, producto.getStock());
-			ps.setString(5, producto.getImagen());
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		
-		return false;
+		return productoDAO.addProducto(producto);
+	}
+
+	public boolean borrarProducto(Producto producto) {
+		return productoDAO.borrarProducto(producto);
 	}
 
 }

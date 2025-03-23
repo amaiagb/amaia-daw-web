@@ -34,7 +34,7 @@
 	
 		<h2>Registrar Nuevo Producto</h2>
 		
-		<form action="altaProducto" method="post" enctype="multipart/form-data">
+		<form action="../altaProducto" method="post" enctype="multipart/form-data">
 			<input type="text" name="nombre"  placeholder="Nombre" required>
 			<input type="text" name="descripcion"  placeholder="Descripción" required>
 			<input type="text" name="precio"  placeholder="Precio" required>

@@ -91,6 +91,55 @@ public class ProductoDAO {
 		return carrito;
 	}
 	
-	
+	public boolean addProducto(Producto producto) {
+		Connection con = AccesoBD.getConnection();
+		PreparedStatement ps = null;
+		
+		String sql = "INSERT INTO productos(nombre, descripcion, precio, stock, imagen) VALUES(?,?,?,?,?);";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, producto.getNombre());
+			ps.setString(2, producto.getDescripcion());
+			ps.setDouble(3, producto.getPrecio());
+			ps.setInt(4, producto.getStock());
+			ps.setString(5, producto.getImagen());
+			
+			if(ps.executeUpdate() > 0) {
+				return true;
+			}else {
+				return false;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+
+	public boolean borrarProducto(Producto producto) {
+		Connection con = AccesoBD.getConnection();
+		PreparedStatement ps = null;
+		
+		String sql = "DELETE FROM productos WHERE id = ?;";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, producto.getId());
+			
+			if(ps.executeUpdate() > 0) {
+				return true;
+			}else {
+				return false;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return false;
+	}
 
 }
