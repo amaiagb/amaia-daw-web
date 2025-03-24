@@ -18,7 +18,7 @@ public class ProductoDAO {
 		ResultSet rs = null;
 		ArrayList<Producto> productos = new ArrayList<Producto>();
 		
-		String sql = "SELECT id, nombre, descripcion, precio, stock, imagen FROM productos;";
+		String sql = "SELECT id, nombre, descripcion, precio, stock, imagen FROM productos ORDER by id DESC;";
 		
 		try {
 			ps = con.prepareStatement(sql);

@@ -43,12 +43,13 @@ public class CarritoController extends HttpServlet {
 					HashMap<Producto, Integer> carritoUnidades = productoService.getProductosMap(carritoCookie);
 					
  					double total = productoService.getTotal(carritoUnidades);
- 					
+ 					System.out.println(carritoUnidades);
 					request.setAttribute("carrito", carritoUnidades);
 					request.setAttribute("total", total);
 				} 
 			}
 		} 
+		
 		//response.sendRedirect("carrito.jsp");
 		request.getRequestDispatcher("carrito.jsp").forward(request, response);
 	}

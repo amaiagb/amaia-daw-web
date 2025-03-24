@@ -19,7 +19,7 @@ public class UsuarioDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
-		String sql = "SELECT u.usuario, u.nombre, u.apellidos, u.email, u.telefono, r.id, r.nombre FROM usuarios u inner join roles r on u.roles_id = r.id";
+		String sql = "SELECT u.usuario, u.nombre, u.apellidos, u.email, u.telefono, r.id, r.nombre FROM usuarios u inner join roles r on u.roles_id = r.id ORDER by r.id DESC";
 		
 		try {
 			ps = con.prepareStatement(sql);
