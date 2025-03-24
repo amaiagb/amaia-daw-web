@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `administradores` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla tienda.administradores: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla tienda.administradores: ~0 rows (aproximadamente)
 INSERT INTO `administradores` (`id`, `Nombre`, `Username`, `Password`, `Email`) VALUES
 	(1, 'Alberto', 'alberto', '1234', 'alberto@gmail.com');
 
@@ -53,21 +53,22 @@ CREATE TABLE IF NOT EXISTS `productos` (
   `Descripcion` text NOT NULL,
   `Precio` double NOT NULL DEFAULT 0,
   `Stock` int(11) NOT NULL DEFAULT 0,
-  `Imagen` varchar(50) NOT NULL DEFAULT '0',
+  `Imagen` varchar(300) NOT NULL DEFAULT '0',
   `Categoria` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_productos_categorias` (`Categoria`),
   CONSTRAINT `FK_productos_categorias` FOREIGN KEY (`Categoria`) REFERENCES `categorias` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla tienda.productos: ~6 rows (aproximadamente)
+-- Volcando datos para la tabla tienda.productos: ~7 rows (aproximadamente)
 INSERT INTO `productos` (`id`, `Nombre`, `Descripcion`, `Precio`, `Stock`, `Imagen`, `Categoria`) VALUES
 	(1, 'Cámara', 'Cámara reflex Fujifilm', 600, 3, 'camara.jpg', 1),
 	(2, 'Ipad', 'iPad 256GB', 400, 10, 'ipad.jpg', 1),
 	(3, 'Auriculares', 'Auriculares Bluetooth', 160, 8, 'headphones.jpg', 2),
 	(4, 'NES', 'Nintendo NES', 320, 2, 'nes.jpg', 3),
 	(5, 'Auriculares Sony', 'Auriculares Bluetooth', 210, 20, 'cascos.jpg', 2),
-	(6, 'Drone', 'Drone 4K Film', 999, 5, 'drone.jpg', 1);
+	(6, 'Drone', 'Drone 4K Film', 999, 5, 'drone.jpg', 1),
+	(12, 'Mac Mini', 'CPU de 10 núcleos', 599, 0, 'mac.jpg', NULL);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
